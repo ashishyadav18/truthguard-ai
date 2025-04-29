@@ -1,0 +1,72 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.chat-container {
+  height: 500px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.message {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 70%;
+}
+
+.user {
+  background-color: #e3f2fd;
+  margin-left: auto;
+}
+
+.ai {
+  background-color: #f5f5f5;
+}
+
+.fake-alert {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+.input-area input {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.bias-button {
+  background-color: #ff9800;
+  color: white;
+}
+
+.bias-result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+/* Fake news alert style */
+.fake-alert-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffebee;
+  padding: 15px;
+  border-left: 4px solid #f44336;
+}
