@@ -1,0 +1,293 @@
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.light {
+  background-color: #f5f5f5;
+  color: #333333;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid;
+}
+
+body.dark .header {
+  border-color: #333;
+}
+
+body.light .header {
+  border-color: #ddd;
+}
+
+.toggle-mode {
+  padding: 8px 12px;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+body.dark .toggle-mode {
+  border: 1px solid #bb86fc;
+  color: #bb86fc;
+}
+
+body.light .toggle-mode {
+  border: 1px solid #3700b3;
+  color: #3700b3;
+}
+
+/* Chat container */
+.chat-container {
+  height: 60vh;
+  border-radius: 12px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.dark .chat-container {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+}
+
+body.light .chat-container {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+/* Message styles */
+.message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 80%;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+body.dark .user {
+  background-color: #3700b3;
+  color: white;
+  margin-left: auto;
+}
+
+body.light .user {
+  background-color: #bb86fc;
+  color: white;
+  margin-left: auto;
+}
+
+body.dark .ai {
+  background-color: #018786;
+  color: white;
+}
+
+body.light .ai {
+  background-color: #03dac6;
+  color: white;
+}
+
+.error {
+  background-color: #cf6679 !important;
+  color: white !important;
+}
+
+/* Input area */
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.input-area input {
+  flex-grow: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+body.dark .input-area input {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+body.light .input-area input {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #ddd;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+body.dark button {
+  background-color: #bb86fc;
+  color: white;
+}
+
+body.light button {
+  background-color: #3700b3;
+  color: white;
+}
+
+.bias-button {
+  background-color: #ff9800 !important;
+}
+
+/* Loading animation */
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.loading-dots div {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+body.dark .loading-dots div {
+  background-color: #bb86fc;
+}
+
+body.light .loading-dots div {
+  background-color: #3700b3;
+}
+
+.loading-dots div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots div:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Bias result */
+.bias-result {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+body.dark .bias-result {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+}
+
+body.light .bias-result {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.bias-metric {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+}
+
+.metric-label {
+  font-weight: 600;
+  margin-right: 10px;
+  min-width: 120px;
+}
+
+.metric-value {
+  flex-grow: 1;
+}
+
+.phrases {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+body.dark .phrases {
+  background-color: rgba(255, 152, 0, 0.2);
+}
+
+body.light .phrases {
+  background-color: rgba(255, 152, 0, 0.3);
+}
+
+.error-message {
+  color: #cf6679;
+  font-weight: 600;
+}
+
+/* Bias score colors */
+.strong-right {
+  color: #ff5252;
+}
+
+.moderate-right {
+  color: #ff8a80;
+}
+
+.strong-left {
+  color: #448aff;
+}
+
+.moderate-left {
+  color: #82b1ff;
+}
+
+.neutral {
+  color: #03dac6;
+}
