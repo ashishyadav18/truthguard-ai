@@ -48,40 +48,35 @@ function App() {
   };
 
   const checkBias = async () => {
-    if (!messages.length) {
-        alert("Please send a message first");
-        return;
-    }
-    
     try {
-        // Get the last user message
-        const lastUserMsg = messages
-            .filter(msg => msg.isUser)
-            .slice(-1)[0]?.text;
-        
-        if (!lastUserMsg) {
-            alert("No user message found");
-            return;
-        }
-
-        console.log("Analyzing:", lastUserMsg);  // Debug log
-        
-        const response = await axios.post('http://localhost:5000/check_bias', {
-            text: lastUserMsg
-        });
-        
-        console.log("Analysis result:", response.data);  // Debug log
-        
-        if (response.data.success) {
-            setBiasResult(response.data);
-        } else {
-            alert(response.data.message || "Analysis failed");
-        }
+      // Get last user message
+      const lastUserMsg = messages
+        .filter(msg => msg.isUser)
+        .slice(-1)[0]?.text;
+  
+      if (!lastUserMsg) {
+        alert("No message to analyze");
+        return;
+      }
+  
+      // Call backend
+      const response = await axios.post('http://localhost:5000/check_bias', {
+        text: lastUserMsg
+      });
+  
+      // Set the complete response data to state
+      setBiasResult({
+        ...response.data,
+        biased_phrases: response.data.biased_phrases || []
+      });
+  
     } catch (error) {
-        console.error("Bias check error:", error.response?.data || error.message);
-        alert(`Analysis failed: ${error.response?.data?.message || error.message}`);
+      console.error("Bias check failed:", error);
+      setBiasResult({
+        error: error.response?.data?.message || error.message
+      });
     }
-};
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !isLoading) {
@@ -160,7 +155,7 @@ function App() {
                 <span className="metric-label">Bias Level:</span>
                 <span className="metric-value">{biasResult.level}</span>
               </div>
-              {biasResult.biased_phrases.length > 0 && (
+              {biasResult.biased_phrases && biasResult.biased_phrases.length > 0 && (
                 <div className="bias-metric">
                   <span className="metric-label">Trigger Phrases:</span>
                   <span className="metric-value phrases">
@@ -168,14 +163,20 @@ function App() {
                   </span>
                 </div>
               )}
+              {biasResult.sentiment && (
+                <div className="bias-metric">
+                  <span className="metric-label">Sentiment:</span>
+                  <span className="metric-value">
+                    {biasResult.sentiment.polarity > 0 ? 'Positive' : 
+                     biasResult.sentiment.polarity < 0 ? 'Negative' : 'Neutral'}
+                    {biasResult.sentiment.polarity !== undefined && ` (Polarity: ${biasResult.sentiment.polarity.toFixed(2)})`}
+                    {biasResult.sentiment.subjectivity !== undefined && `, Subjectivity: ${biasResult.sentiment.subjectivity.toFixed(2)}`}
+                  </span>
+                </div>
+              )}
               <div className="bias-metric">
-                <span className="metric-label">Sentiment:</span>
-                <span className="metric-value">
-                  {biasResult.analysis.polarity > 0 ? 'Positive' : 
-                   biasResult.analysis.polarity < 0 ? 'Negative' : 'Neutral'}
-                  (Polarity: {biasResult.analysis.polarity.toFixed(2)}, 
-                  Subjectivity: {biasResult.analysis.subjectivity.toFixed(2)})
-                </span>
+                <span className="metric-label">Analyzed Text:</span>
+                <span className="metric-value">{biasResult.text_analyzed}</span>
               </div>
             </>
           )}
@@ -186,4 +187,3 @@ function App() {
 }
 
 export default App;
-
