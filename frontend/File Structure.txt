@@ -1,0 +1,20 @@
+truthguard-ai/
+├── backend/
+│   ├── auth.py               # Authentication routes
+│   ├── app.py                # Main Flask application
+│   ├── requirements.txt      # Python dependencies
+│   └── .env                  # Environment variables
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AuthForm.js   # Login/Register form
+│   │   │   └── ChatMessage.js # Individual message component
+│   │   ├── context/
+│   │   │   └── AuthContext.js # Authentication state
+│   │   ├── hooks/
+│   │   │   └── useChatStorage.js # Storage logic
+│   │   ├── App.js            # Main application
+│   │   ├── App.css           # Main styles
+│   │   └── index.js          # React entry point
+│   └── public/               # Static files
+└── README.md                 # Project documentation
